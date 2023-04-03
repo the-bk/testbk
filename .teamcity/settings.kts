@@ -52,7 +52,7 @@ object Build : BuildType({
         }
         script {
             name = "qqq"
-            scriptContent = "docker run --rm -v ${'$'}PWD:/workdir jetbrains/intellij-http-client -D run.http"
+            scriptContent = "docker run --rm -v ${'$'}PWD:/workdir jetbrains/intellij-http-client -D run.http --report"
         }
     }
 
