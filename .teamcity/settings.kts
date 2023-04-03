@@ -50,7 +50,7 @@ object Build : BuildType({
         }
         script {
             name = "qqq"
-            scriptContent = "docker run --rm -i -t -v ${'$'}PWD:/workdir jetbrains/intellij-http-client -e dev -v env.json -p private.env.json -D run.http"
+            scriptContent = "docker run --rm -i -t -v ${'$'}PWD:/workdir jetbrains/intellij-http-client -D run.http"
             dockerImage = "jetbrains/intellij-http-client"
         }
     }
