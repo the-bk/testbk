@@ -1,0 +1,19 @@
+GET https://www.marcobehler.com
+
+####
+
+GET https://www.marcobehlerzzzz.com
+
+###
+
+# Check response status is 200
+GET https://httpbin.org/status/404
+
+> {%
+  client.test("Request #3 is 200", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+  });
+%}
+
+###
+
