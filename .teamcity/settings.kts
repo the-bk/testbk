@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.schedule
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
@@ -45,6 +46,11 @@ object Build : BuildType({
         maven {
             goals = "clean package"
             dockerImage = "maven:latest"
+        }
+        script {
+            name = "qqq"
+            scriptContent = "./ijhttp run.http"
+            dockerImage = "jetbrains/intellij-http-client"
         }
     }
 
