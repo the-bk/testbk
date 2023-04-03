@@ -1,4 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.XmlReport
+import jetbrains.buildServer.configs.kotlin.buildFeatures.xmlReport
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.schedule
@@ -61,6 +63,13 @@ object Build : BuildType({
             schedulingPolicy = weekly {
             }
             triggerBuild = always()
+        }
+    }
+
+    features {
+        xmlReport {
+            reportType = XmlReport.XmlReportType.SUREFIRE
+            rules = "reports/**/*.xml"
         }
     }
 })
