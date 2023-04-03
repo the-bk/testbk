@@ -52,7 +52,7 @@ object Build : BuildType({
             name = "qqq"
             scriptContent = """
                 ls -la
-                
+                ls -la /workdir
                 ./ijhttp run.http
             """.trimIndent()
             dockerImage = "jetbrains/intellij-http-client"
