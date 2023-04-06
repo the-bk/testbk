@@ -32,8 +32,13 @@ version = "2022.10"
 
 project {
 
+    buildType(Blahblah)
     buildType(Build)
 }
+
+object Blahblah : BuildType({
+    name = "Blahblah"
+})
 
 object Build : BuildType({
     name = "Build"
