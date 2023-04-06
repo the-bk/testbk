@@ -42,6 +42,11 @@ object Blahblah : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    dependencies {
+        snapshot(Build) {
+        }
+    }
 })
 
 object Build : BuildType({
