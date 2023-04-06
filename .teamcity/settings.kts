@@ -38,6 +38,10 @@ project {
 
 object Blahblah : BuildType({
     name = "Blahblah"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
 
 object Build : BuildType({
