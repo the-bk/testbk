@@ -1,0 +1,36 @@
+Show terminal run /Interactive CLI different
+
+ijhttp C:\dev\anewtodolist\run.http
+
+Different logging levels
+
+ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+
+
+Env-file and env
+
+ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+
+
+Docker mode
+
+ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+
+
+Insecure
+
+ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+
+
+Reports
+
+ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+
+
+
+docker run --rm -v $PWD:/workdir jetbrains/intellij-http-client run.http
+
+docker run --rm -i -t -v $PWD:/workdir jetbrains/intellij-http-client -e dev -v env.json -p private.env.json -D run.http
+
+
+
