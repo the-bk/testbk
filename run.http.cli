@@ -1,36 +1,36 @@
-Show terminal run /Interactive CLI different
+### Insecure Show terminal run /Interactive CLI different
 
 ijhttp C:\dev\anewtodolist\run.http
 
-Different logging levels
+### Insecure Different logging levels
 
-ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
-
-
-Env-file and env
-
-ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+ijhttp C:\dev\anewtodolist\run.http -L VERBOSE
 
 
-Docker mode
+### Insecure Env-file and env
 
-ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+ijhttp C:\dev\anewtodolist\run.http -L VERBOSE -e dev
 
-
-Insecure
-
-ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+ijhttp C:\dev\anewtodolist\run.http -L VERBOSE -e dev -v C:\dev\anewtodolist\http-client.env.json
 
 
-Reports
 
-ijhttp -L VERBOSE C:\dev\anewtodolist\run.http -----TODO
+
+### Insecure
+
+ijhttp C:\dev\anewtodolist\run.http -L VERBOSE -e dev -v C:\dev\anewtodolist\http-client.env.json --insecure
+
+
+### Reports
+
+ijhttp C:\dev\anewtodolist\run.http -L VERBOSE -e dev -v C:\dev\anewtodolist\http-client.env.json --insecure --report
 
 
 
 docker run --rm -v $PWD:/workdir jetbrains/intellij-http-client run.http
 
-docker run --rm -i -t -v $PWD:/workdir jetbrains/intellij-http-client -e dev -v env.json -p private.env.json -D run.http
+docker run --rm -v $PWD:/workdir jetbrains/intellij-http-client -e dev -v http-client.env.json -D run.http
 
 
+### Docker mode
 
