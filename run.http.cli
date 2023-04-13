@@ -1,3 +1,7 @@
+
+curl -f -L -o ijhttp.zip "https://jb.gg/ijhttp/latest"
+
+
 ### Insecure Show terminal run /Interactive CLI different
 
 ijhttp C:\dev\anewtodolist\run.http
