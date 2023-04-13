@@ -1,0 +1,64 @@
+GET http://localhost:8080/todos
+
+### Get All Userzzz
+
+GET http://localhost:8080/users
+
+### Create a new todo
+
+
+POST http://localhost:8080/todos
+Content-Type: application/json
+
+{
+  "name": "need to go shopping",
+  "done": false
+}
+
+###
+
+GET http://{{host}}/users
+
+###
+
+POST http://localhost:8080/todos?timestamp={{$isoTimestamp}}
+Content-Type: application/json
+
+{
+  "name": "{{$random.alphanumeric(10}}",
+  "done": false
+}
+
+###
+
+
+GET http://localhost:8080/todos
+
+> {%
+
+    client.test("Todo Request is 200", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+
+    client.test("Todo Contains Specific Item", function() {
+        client.assert(response.body[0].name.indexOf("never") !== -1, "Todo list does not contain item");
+    });
+
+    client.test("Something Else", function() {
+        client.assert(response.body[0].name.indexOf("yes yes yes!") !== -1, "something else is broken ;)");
+    });
+
+    client.global.set("my_cookie", response.headers.valuesOf("Set-Cookie")[0]);
+
+%}
+
+### Authorization
+
+< {%
+    const timestamp = Math.floor(new Date().getTime() / 1000);
+    request.variables.set("timestamp", timestamp)
+    request.variables.set("signature", crypto.hmac.sha256().withTextSecret("my secret api key").updateWithText("timestamp=" + timestamp).digest().toHex());
+%}
+GET http://localhost:8080/todos?timestamp={{timestamp}}&signature={{signature}}
+Accept: application/json

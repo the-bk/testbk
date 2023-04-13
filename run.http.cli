@@ -43,3 +43,6 @@ chmod +x mvnw
 ./mvnw spring-boot:run &
 sleep 10s
 docker run --add-host=host.docker.internal:host-gateway --rm -v $PWD:/workdir jetbrains/intellij-http-client -e dev -v http-client.env.json -D --report run.http
+
+
+https://blog.jetbrains.com/idea/2022/12/http-client-cli-run-requests-and-tests-on-ci/
