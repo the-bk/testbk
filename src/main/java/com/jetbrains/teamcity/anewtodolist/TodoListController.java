@@ -17,44 +17,33 @@ public class TodoListController {
     public List<Todo> todos = new CopyOnWriteArrayList<>(Arrays.asList(new Todo("never done", false)));
 
     public static final class Todo {
-        private final String name;
-        private final Boolean done;
+        private String name;
+        private Boolean done;
+
+        public Todo() {
+        }
 
         public Todo(String name, Boolean done) {
             this.name = name;
             this.done = done;
         }
 
-        public String name() {
+        public String getName() {
             return name;
         }
 
-        public Boolean done() {
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Boolean getDone() {
             return done;
         }
 
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == this) return true;
-            if (obj == null || obj.getClass() != this.getClass()) return false;
-            var that = (Todo) obj;
-            return Objects.equals(this.name, that.name) &&
-                    Objects.equals(this.done, that.done);
+        public void setDone(Boolean done) {
+            this.done = done;
         }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name, done);
-        }
-
-        @Override
-        public String toString() {
-            return "Todo[" +
-                    "name=" + name + ", " +
-                    "done=" + done + ']';
-        }
-
-        }
+    }
 
 
     @GetMapping("/todos")

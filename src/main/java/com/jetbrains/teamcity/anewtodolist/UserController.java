@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @RestController
@@ -15,36 +14,24 @@ public class UserController {
     public List<User> users = new CopyOnWriteArrayList<>(Arrays.asList(new User("Marco")));
 
     public static final class User {
-        private final String nam;
+        private String name;
 
-        public User(String nam) {
-            this.nam = nam;
+        public User() {
         }
 
-        public String nam() {
-            return nam;
+        public User(String name) {
+            this.name = name;
         }
 
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == this) return true;
-            if (obj == null || obj.getClass() != this.getClass()) return false;
-            var that = (User) obj;
-            return Objects.equals(this.nam, that.nam);
+
+        public String getName() {
+            return name;
         }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(nam);
+        public void setName(String name) {
+            this.name = name;
         }
-
-        @Override
-        public String toString() {
-            return "User[" +
-                    "nam=" + nam + ']';
-        }
-
-        }
+    }
 
 
     @GetMapping("/users")
