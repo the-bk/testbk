@@ -25,12 +25,11 @@ ijhttp C:\dev\anewtodolist\run.http -L VERBOSE -e dev -v C:\dev\anewtodolist\htt
 
 ijhttp C:\dev\anewtodolist\run.http -L VERBOSE -e dev -v C:\dev\anewtodolist\http-client.env.json --insecure --report
 
-
+###
 
 docker run --rm -v $PWD:/workdir jetbrains/intellij-http-client run.http
 
-docker run --rm -v $PWD:/workdir jetbrains/intellij-http-client -e dev -v http-client.env.json -D run.http
-
+docker run --add-host=host.docker.internal:host-gateway --rm -v $PWD:/workdir jetbrains/intellij-http-client -e dev -v http-client.env.json -D --report run.http
 
 ### Docker mode
 
