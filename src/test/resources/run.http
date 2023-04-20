@@ -1,6 +1,6 @@
 GET http://localhost:8080/todos
 
-###
+### a name...
 
 GET http://localhost:8080/users
 
@@ -16,10 +16,6 @@ Content-Type: application/json
 
 ###
 
-GET {{host}}/todos
-
-### https://youtrack.jetbrains.com/issue/IDEA-300163/HTTP-Client-add-new-dynamic-variables
-
 POST http://localhost:8080/todos
 Content-Type: application/json
 
@@ -27,6 +23,14 @@ Content-Type: application/json
   "name": "{{$random.alphanumeric(10)}}",
   "done": false
 }
+
+
+###
+
+GET {{host}}/todos
+
+### https://youtrack.jetbrains.com/issue/IDEA-300163/HTTP-Client-add-new-dynamic-variables
+
 
 
 ### HTTP Client Testing
@@ -43,12 +47,7 @@ GET http://localhost:8080/todos
       client.assert(response.body[0].name.indexOf("never") !== -1, "Todo list does not contain item");
   });
 
-  client.test("Something Else", function() {
-      client.assert(response.body[0].name.indexOf("yes yes yes!") !== -1, "something else is broken ;)");
-  });
-
   client.global.set("my_cookie", response.headers.valuesOf("Set-Cookie")[0]);
-
 %}
 
 ### Authorization
@@ -64,6 +63,5 @@ Accept: application/json
 ### CURL
 
 ### WEBSOCKET/GRCP/GRAPHQL
-
 
 ### curl -f -L -o ijhttp.zip "https://jb.gg/ijhttp/latest"
