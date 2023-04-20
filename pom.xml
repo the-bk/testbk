@@ -15,7 +15,7 @@
 	<description>Demo Project Teamcity Kotlin DSL</description>
  <!-- Test -->
 	<properties>
-		<java.version>11</java.version>
+		<java.version>11</java.version> <!-- test-->
 	</properties>
 
 	<dependencies>
