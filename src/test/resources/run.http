@@ -1,10 +1,10 @@
 GET http://localhost:8080/todos
 
-### Get All Users
+###
 
 GET http://localhost:8080/users
 
-### Create a new todo
+###
 
 POST http://localhost:8080/todos
 Content-Type: application/json
