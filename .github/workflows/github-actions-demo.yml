@@ -20,4 +20,4 @@ jobs:
       - name: Build and analyze
         env:          
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}          
-        run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=anewtodolist -Dsonar.organization=marcobehlerjetbrains -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: ./mvnw -B verify sonar:sonar -Dsonar.organization=marcobehlerjetbrains -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
