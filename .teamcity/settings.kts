@@ -45,7 +45,7 @@ project {
     }
 }
 
-class Maven(name: String, goals: Strings, runnerArgs: String? = null) : BuildType {
+class Maven(name: String, goals: Strings, runnerArgs: String? = null) : BuildType ({
     this.name = name
 
     vcs {
@@ -58,7 +58,7 @@ class Maven(name: String, goals: Strings, runnerArgs: String? = null) : BuildTyp
             this.runnerArgs = runnerArgs
         }
     }    
-}
+})
 
 // object Build : BuildType({
 //     name = "Build"
