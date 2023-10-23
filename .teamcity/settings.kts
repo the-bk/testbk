@@ -36,12 +36,12 @@ project {
 
     sequential {
         buildType(Build)
-        buildType(FastTest)
-        buildType(SlowTest)
-        // parrallel {
-        //     buildType(FastTest)
-        //     buildType(SlowTest)
-        // }
+        // buildType(FastTest)
+        // buildType(SlowTest)
+        parrallel {
+            buildType(FastTest)
+            buildType(SlowTest)
+        }
         buildType(Package)
     }
 }
