@@ -28,28 +28,25 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.05"
 
 project {
-
-    buildType(Build)
-    buildType(FastTest)
-    buildType(SlowTest)
-    buildType(Package)
-
-    sequential {
-        buildType(Build)
+    val bts = sequential {
+        buildType(Maven("Build","clean compile"))
         parrallel{
-            buildType(FastTest)
-            buildType(SlowTest)
+            buildType(Maven("Fast Test","clean test","-Dmaven.test.failure.ignore=true -Dtest=*.unit.*Test"))
+            buildType(Maven("Slow Test","clean test","-Dmaven.test.failure.ignore=true -Dtest=*.integration.*Test"))
         }
-        // parrallel {
-        //     buildType(FastTest)
-        //     buildType(SlowTest)
-        // }
-        buildType(Package)
+        buildType(Maven("Package","clean package","-Dmaven.test.failure.ignore=true"))
+    }.buildSteps()
+
+    bts.forEach{ buildType(it) }
+    bts.last().triggers {
+        vcs {
+
+        }
     }
 }
 
-object Build : BuildType({
-    name = "Build"
+class Maven(name: String, goals: Strings, runnerArgs: String? = null) : BuildType {
+    this.name = name
 
     vcs {
         root(DslContext.settingsRoot)
@@ -57,58 +54,73 @@ object Build : BuildType({
 
     steps {
         maven {
-            goals = "clean compile"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
+            this.goals = goals
+            this.runnerArgs = runnerArgs
         }
-    }
-})
+    }    
+}
 
-object FastTest : BuildType({
-    name = "Fast Test"
+// object Build : BuildType({
+//     name = "Build"
 
-    vcs {
-        root(DslContext.settingsRoot)
-    }
+//     vcs {
+//         root(DslContext.settingsRoot)
+//     }
 
-    steps {
-        maven {
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true -Dtest=*.unit.*Test"
-        }
-    }
-})
+//     steps {
+//         maven {
+//             goals = "clean compile"
+//             runnerArgs = "-Dmaven.test.failure.ignore=true"
+//         }
+//     }
+// })
 
-object SlowTest : BuildType({
-    name = "Slow Test"
+// object FastTest : BuildType({
+//     name = "Fast Test"
 
-    vcs {
-        root(DslContext.settingsRoot)
-    }
+//     vcs {
+//         root(DslContext.settingsRoot)
+//     }
 
-    steps {
-        maven {
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true -Dtest=*.integration.*Test"
-        }
-    }
-})
+//     steps {
+//         maven {
+//             goals = "clean test"
+//             runnerArgs = "-Dmaven.test.failure.ignore=true -Dtest=*.unit.*Test"
+//         }
+//     }
+// })
 
-object Package : BuildType({
-    name = "Package"
+// object SlowTest : BuildType({
+//     name = "Slow Test"
 
-    vcs {
-        root(DslContext.settingsRoot)
-    }
+//     vcs {
+//         root(DslContext.settingsRoot)
+//     }
 
-    steps {
-        maven {
-            goals = "clean package"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
-        }
-    }
+//     steps {
+//         maven {
+//             goals = "clean test"
+//             runnerArgs = "-Dmaven.test.failure.ignore=true -Dtest=*.integration.*Test"
+//         }
+//     }
+// })
 
-    triggers {
-        vcs {
-        }
-    }
-})
+// object Package : BuildType({
+//     name = "Package"
+
+//     vcs {
+//         root(DslContext.settingsRoot)
+//     }
+
+//     steps {
+//         maven {
+//             goals = "clean package"
+//             runnerArgs = "-Dmaven.test.failure.ignore=true"
+//         }
+//     }
+
+//     triggers {
+//         vcs {
+//         }
+//     }
+// })
